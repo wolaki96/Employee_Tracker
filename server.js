@@ -3,7 +3,6 @@ const express = require('express');
 const mysql2 = require('mysql2');
 const inquirer = require('inquirer');
 const fs = require('fs');
-const { allowedNodeEnvironmentFlags } = require('process');
 
 
 const PORT = process.env.PORT || 3001;
@@ -96,5 +95,5 @@ function addEmployee(){
 
 };
 function updateEmployee(){
-    
+
 };
