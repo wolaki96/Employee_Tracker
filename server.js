@@ -2,6 +2,7 @@
 const express = require('express');
 const mysql2 = require('mysql2');
 const inquirer = require('inquirer');
+const fs = require('fs');
 
 
 const PORT = process.env.PORT || 3001;
@@ -19,7 +20,7 @@ const db = mysql2.createConnection(
 // err if not connected/start connection
 db.connect(function(err) {
     if (err) throw err;
-    console.log("connected to the Employee Tracker!")
+    console.log("Connected to the Employee Tracker!")
     theMenu();
 })
 
@@ -34,10 +35,26 @@ inquirer
         "View All Roles",
         "View All Employees",
         "Add a Department",
-        "Add a Department",
         "Add a Role",
-        "Add an Employee"
+        "Add an Employee",
+        "Update an Employee Role"
     ]
-        
     })
-}
+    // choices deploy functions to interact with tables
+    .then(function ({ answer }) {
+        switch (answer) {
+            case "View All Departments":
+            viewDepartments();
+            break;
+
+            case "View All Roles":
+            viewRoles();
+            break;
+
+            case "View All Employees":
+            viewEmployees();
+            break;
+
+            case "Add a Department"
+        }
+    })}
