@@ -18,7 +18,8 @@ const db = mysql2.createConnection(
         user: 'root',
         password: 'A_PW6_MF5a?',
         database: 'employee_db'
-    }
+    },
+    console.log('Connected to the Local Host')
 )
 // err if not connected/start connection
 db.connect(function(err) {
@@ -44,8 +45,8 @@ inquirer
     ]
     })
     // choices deploy functions to interact with tables
-    .then(function ({ answer }) {
-        switch (answer) {
+    .then(function ({ task }) {
+        switch (task) {
             case "View All Departments":
             viewDepartments();
             break;
@@ -77,35 +78,37 @@ inquirer
     })}
 // functions to respond to questions
 
+
 function viewDepartments() {
-db.query("SELECT * FROM department", function (err, res){
+db.query(`SELECT * FROM department`, function (err, res){
     if (err) throw err;
     console.log("Here are the current departments");
-    console.table(res);
+    console.table(res)
     theMenu();
+
 })
 };
 
-function viewRoles(){
+// function viewRoles(){
+// console.log('working?')
+// };
 
-};
+// function viewEmployees(){
 
-function viewEmployees(){
+// };
 
-};
+// function addDepartment() {
 
-function addDepartment() {
+// };
+// function addRole(){
 
-};
-function addRole(){
+// };
+// function addEmployee(){
 
-};
-function addEmployee(){
+// };
+// function updateEmployee(){
 
-};
-function updateEmployee(){
-
-};
+// };
 
 
 // errors/connections to ports
