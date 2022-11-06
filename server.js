@@ -79,26 +79,31 @@ db.query("SELECT * FROM department", function (err, res){
 })
 };
 
-// function viewRoles(){
-// console.log('working?')
-// };
+function viewRoles(){
+console.log('Here are the current roles')
+db.query("SELECT id, title FROM job_role", function (err, res){
+    if (err) throw err;
+    console.table(res);
+    theMenu();
+})
+};
 
-// function viewEmployees(){
+function viewEmployees(){
 
-// };
+};
 
-// function addDepartment() {
+function addDepartment() {
 
-// };
-// function addRole(){
+};
+function addRole(){
 
-// };
-// function addEmployee(){
+};
+function addEmployee(){
 
-// };
-// function updateEmployee(){
+};
+function updateEmployee(){
 
-// };
+};
 
 
 // errors/connections to ports
