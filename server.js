@@ -111,9 +111,32 @@ inquirer.prompt(
 
 };
 function addRole(){
+    console.log("What role would you like to add?");
+    inquirer.prompt(
+        {
+            type: 'input',
+            name: 'Role',
+            answer: ""
+    
+        }
+    )
 
 };
 function addEmployee(){
+    console.log("What is the employees name you would like to add?")
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'firstname',
+            answer: "First Name",
+    
+        },
+        {
+            type: 'input',
+            name: 'lastname',
+            answer: 'Last Name',
+        }
+    ])
 
 };
 function updateEmployee(){
