@@ -89,7 +89,12 @@ db.query("SELECT id, title FROM job_role", function (err, res){
 };
 
 function viewEmployees(){
-
+console.log('Here are the current Employees')
+db.query("SELECT role_id, first_name, last_name FROM employees", function (err, res){
+    if (err) throw err;
+    console.table(res);
+    theMenu();
+})
 };
 
 function addDepartment() {
