@@ -3,6 +3,7 @@ const express = require('express');
 const mysql2 = require('mysql2');
 const inquirer = require('inquirer');
 const fs = require('fs');
+const { allowedNodeEnvironmentFlags } = require('process');
 
 
 const PORT = process.env.PORT || 3001;
@@ -55,6 +56,20 @@ inquirer
             viewEmployees();
             break;
 
-            case "Add a Department"
+            case "Add a Department":
+            addDepartment();
+            break;
+
+            case "Add a Role":
+            addRole();
+            break;
+
+            case "Add an Employee":
+            addEmployee();
+            break;
+
+            case "Update an Employee Role":
+            updateEmployee();
+            break;
         }
     })}
