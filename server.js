@@ -34,7 +34,7 @@ function theMenu() {
 inquirer
     .prompt({
         type: 'list',
-        name: "view",
+        name: "choose",
         choices: ["View All Departments",
         "View All Roles",
         "View All Employees",
@@ -47,17 +47,17 @@ inquirer
     })
     // choices deploy functions to interact with tables
     .then((choice) => {
-        if (choice.view === "View All Departments") {
+        if (choice.choose === "View All Departments") {
             viewDepartments();
-        } else if (choice.view === "View All Roles") {
+        } else if (choice.choose === "View All Roles") {
             viewRoles(); 
-        } else if (choice.view === "View All Employees") {
+        } else if (choice.choose === "View All Employees") {
             viewEmployees(); 
-        } else if (choice.view === "Add a Department") {
+        } else if (choice.choose === "Add a Department") {
             addDepartment();
-        } else if (choice.view === "Add a Role") {
+        } else if (choice.choose === "Add a Role") {
             addRole();
-        } else if (choice.view === "Add an Employee") {
+        } else if (choice.choose === "Add an Employee") {
             addEmployee();
            
         } else {
@@ -98,6 +98,16 @@ db.query("SELECT role_id, first_name, last_name FROM employees", function (err, 
 };
 
 function addDepartment() {
+    console.log("What department would you like to add?");
+inquirer.prompt(
+    {
+        type: 'input',
+        name: 'Department',
+        answer: ""
+
+    }
+)
+
 
 };
 function addRole(){
