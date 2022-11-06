@@ -1,2 +1,2 @@
-SELECT id, department_name 
+SELECT *
 FROM department;

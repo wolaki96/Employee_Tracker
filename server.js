@@ -42,48 +42,38 @@ inquirer
         "Add a Role",
         "Add an Employee",
         "Update an Employee Role"
+        
     ]
     })
     // choices deploy functions to interact with tables
-    .then(function ({ task }) {
-        switch (task) {
-            case "View All Departments":
+    .then((choice) => {
+        if (choice.view === "View All Departments") {
             viewDepartments();
-            break;
-
-            case "View All Roles":
-            viewRoles();
-            break;
-
-            case "View All Employees":
-            viewEmployees();
-            break;
-
-            case "Add a Department":
+        } else if (choice.view === "View All Roles") {
+            viewRoles(); 
+        } else if (choice.view === "View All Employees") {
+            viewEmployees(); 
+        } else if (choice.view === "Add a Department") {
             addDepartment();
-            break;
-
-            case "Add a Role":
+        } else if (choice.view === "Add a Role") {
             addRole();
-            break;
-
-            case "Add an Employee":
+        } else if (choice.view === "Add an Employee") {
             addEmployee();
-            break;
-
-            case "Update an Employee Role":
+           
+        } else {
             updateEmployee();
-            break;
         }
-    })}
+        });
+    }
+    
 // functions to respond to questions
 
 
 function viewDepartments() {
-db.query(`SELECT * FROM department`, function (err, res){
-    if (err) throw err;
     console.log("Here are the current departments");
-    console.table(res)
+db.query("SELECT * FROM department", function (err, res){
+    if (err) throw err;
+    console.table(res);
     theMenu();
 
 })
