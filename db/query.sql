@@ -1,1 +1,2 @@
-SELECT department.department_name
+SELECT id, department_name 
+FROM department;

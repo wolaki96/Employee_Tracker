@@ -2,7 +2,10 @@
 const express = require('express');
 const mysql2 = require('mysql2');
 const inquirer = require('inquirer');
-const fs = require('fs');
+// to be able to see the table in the CLI
+const table = require('console.table');
+
+
 
 
 const PORT = process.env.PORT || 3001;
@@ -75,8 +78,14 @@ inquirer
 // functions to respond to questions
 
 function viewDepartments() {
+db.query("SELECT * FROM department", function (err, res){
+    if (err) throw err;
+    console.log("Here are the current departments");
+    console.table(res);
+    theMenu();
+})
+};
 
-}
 function viewRoles(){
 
 };
@@ -97,3 +106,13 @@ function addEmployee(){
 function updateEmployee(){
 
 };
+
+
+// errors/connections to ports
+app.use((req, res) => {
+    res.status(404).end();
+  });
+  
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
