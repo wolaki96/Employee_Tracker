@@ -106,7 +106,15 @@ inquirer.prompt(
         answer: ""
 
     }
+    
 )
+.then((answer) => {
+    db.query('INSERT INTO department(department_name) VALUES (?)', answer.Department, function(err, res){
+        if (err){
+            throw err;
+        } theMenu();
+    })
+})
 
 
 };
@@ -140,6 +148,7 @@ function addEmployee(){
 
 };
 function updateEmployee(){
+    console.log("What would you like to update about the employee?");
 
 };
 
