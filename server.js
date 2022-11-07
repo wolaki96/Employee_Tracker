@@ -168,8 +168,27 @@ function addRole(){
 })
 };
 function addEmployee(){
-    console.log("What is the employees name you would like to add?")
+    // add roles
+    db.query('SELECT id, title FROM job_role', function (err, res){
+        if (err){
+            throw err;
+        }
+        console.table(res);
+    // let user see roles and role ids
+    let role_selection = res.map((job_role)=>{
+        return {
+            name: job_role.id,
+            // value: job_role.title
+        }
+        
+    })
     inquirer.prompt([
+        {
+            type: 'list',
+            name: 'role',
+            answer: "Choose the employee's job role",
+            choices: role_selection
+        },
         {
             type: 'input',
             name: 'firstname',
@@ -180,9 +199,17 @@ function addEmployee(){
             type: 'input',
             name: 'lastname',
             answer: 'Last Name',
-        }
+        },
+       
     ])
-
+    .then((answer) => {
+        db.query('INSERT INTO employees(role_id, first_name, last_name) VALUES (?, ?, ?)', [answer.role, answer.firstname, answer.lastname],  function (err, res){
+            if (err){
+                throw err;
+        } theMenu();
+    })
+})
+})
 };
 function updateEmployee(){
     console.log("What would you like to update about the employee?");
