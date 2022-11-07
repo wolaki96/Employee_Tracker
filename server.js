@@ -213,7 +213,17 @@ function addEmployee(){
 };
 function updateEmployee(){
     console.log("What would you like to update about the employee?");
-
+    db.query('SELECT * FROM employees', function (err, res){
+        if (err){
+            throw err;
+        }
+        console.table(res);
+    // let user see roles and role ids
+    let employeeName = res.map((chooseEmployee)=>{
+        return {
+            name: chooseEmployee.first_name + " " + chooseEmployee.last_name
+            
+        }
 };
 
 
