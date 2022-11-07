@@ -212,7 +212,7 @@ function addEmployee() {
     })
 };
 function updateEmployee() {
-    console.log("What would you like to update about the employee?");
+    console.log("Which employee would you like to update?");
     db.query('SELECT first_name, last_name FROM employees', function (err, res) {
         if (err) {
             throw err;
@@ -223,19 +223,20 @@ function updateEmployee() {
             return {
                 name: chooseEmployee.first_name + " " + chooseEmployee.last_name
             }
-        })
+        });
+
         db.query('SELECT role_id FROM employees', function (err, res) {
             if (err) {
                 throw err;
             }
             console.table(res);
             // let user see roles and role ids
-            let employeeRole = res.map((chooseEmployee) => {
+            let employeeRole = res.map((chooseEmployeeRole) => {
                 return {
-                    name: chooseEmployee.job_role
+                    name: chooseEmployeeRole.title,
+                    value: chooseEmployeeRole.id
                 }
-            })
-        })
+            });
         inquirer.prompt([
             {
                 type: 'list',
@@ -253,14 +254,14 @@ function updateEmployee() {
 
         ])
             .then((answer) => {
-                db.query('INSERT INTO employees(role_id, first_name, last_name) VALUES (?, ?, ?)', [answer.role, answer.firstname, answer.lastname], function (err, res) {
+                db.query(`UPDATE employees SET role_id = ${answer.role} WHERE employees.id = ${answer.employee}`,  function (err, res) {
                     if (err) {
                         throw err;
                     } theMenu();
                 })
-            })
+              })
     })
-};
+})};
 
 
 // errors/connections to ports
