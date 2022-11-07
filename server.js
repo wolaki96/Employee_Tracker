@@ -119,16 +119,53 @@ inquirer.prompt(
 
 };
 function addRole(){
-    console.log("What role would you like to add?");
-    inquirer.prompt(
+    db.query('SELECT * FROM department', function (err, res){
+        if (err){
+            throw err;
+        }
+        console.table(res);
+    
+// showing the list of choices so that the user can choose the department
+
+    let chooseDepartment = res.map((department)=>{
+        return {
+            name: department.name,
+            value: department.id
+        }
+    })
+    
+    inquirer.prompt([
         {
+            type: 'list',
+            name: 'departmentChoice',
+            message: "What department is this role under?",
+            choices: chooseDepartment, 
+            
+    
+        },
+        {   
             type: 'input',
             name: 'Role',
-            answer: ""
-    
-        }
-    )
+            answer: "",
+           
+        },
+        {
+            type: 'input',
+            name: 'Salary',
+            answer: "What is the salary of this role?",
 
+           
+        }
+    ]
+    )
+.then((answer) => {
+    db.query('INSERT INTO job_role(department_id, title, salary) VALUES (?, ?, ?)', answer.departmentChoice, answer.Role, answer.Salary,  function (err, res){
+        if (err){
+            throw err;
+    } theMenu();
+})
+})
+})
 };
 function addEmployee(){
     console.log("What is the employees name you would like to add?")
