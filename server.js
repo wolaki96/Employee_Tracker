@@ -213,7 +213,7 @@ function addEmployee() {
 };
 function updateEmployee() {
     console.log("Which employee would you like to update?");
-    db.query('SELECT first_name, last_name FROM employees', function (err, res) {
+    db.query('SELECT * FROM employees', function (err, res) {
         if (err) {
             throw err;
         }
@@ -221,7 +221,8 @@ function updateEmployee() {
         // let user see roles and role ids
         let employeeName = res.map((chooseEmployee) => {
             return {
-                name: chooseEmployee.first_name + " " + chooseEmployee.last_name
+                name: chooseEmployee.first_name + " " + chooseEmployee.last_name,
+                value: chooseEmployee.id
             }
         });
 
@@ -229,12 +230,12 @@ function updateEmployee() {
             if (err) {
                 throw err;
             }
-            console.table(res);
+            // console.table(res);
             // let user see roles and role ids
             let employeeRole = res.map((chooseEmployeeRole) => {
                 return {
-                    name: chooseEmployeeRole.title,
-                    value: chooseEmployeeRole.id
+
+                    value: chooseEmployeeRole.role_id
                 }
             });
         inquirer.prompt([
@@ -254,7 +255,8 @@ function updateEmployee() {
 
         ])
             .then((answer) => {
-                db.query(`UPDATE employees SET role_id = ${answer.role} WHERE employees.id = ${answer.employee}`,  function (err, res) {
+                const updated = `UPDATE employees SET role_id = ${answer.role} WHERE employees.id = ${answer.employee}`;
+                db.query(updated, function (err, res) {
                     if (err) {
                         throw err;
                     } theMenu();
