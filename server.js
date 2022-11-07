@@ -159,7 +159,7 @@ function addRole(){
     ]
     )
 .then((answer) => {
-    db.query('INSERT INTO job_role(department_id, title, salary) VALUES (?, ?, ?)', answer.departmentChoice, answer.Role, answer.Salary,  function (err, res){
+    db.query('INSERT INTO job_role(department_id, title, salary) VALUES (?, ?, ?)', [answer.departmentChoice, answer.Role, answer.Salary],  function (err, res){
         if (err){
             throw err;
     } theMenu();
